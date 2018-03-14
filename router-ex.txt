@@ -1,0 +1,85 @@
+BATMAN Component
+-------------------------------------------
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-batman',
+  template: `
+    <p>  batman page! </p>
+
+   <ul>
+      <li><a [routerLink]="[]">Home</a></li>
+      <li><a [routerLink]="['/batman']">Batman</a></li>
+      <li><a [routerLink]="['/superman']">Superman</a></li>
+    </ul>
+  `
+})
+export class BatmanComponent{
+
+}
+
+HOME COMPONENT
+--------------------------------------------
+import { Component, OnInit } from '@angular/core';
+// ul>(li>a[href]{Link})*3
+/*
+<ul>
+  <li><a href="">Home</a></li>
+  <li><a href="/batman">Batman</a></li>
+  <li><a href="/superman">Superman</a></li>
+</ul>
+*/
+@Component({
+  selector: 'app-welcome',
+  template: `
+    <p> welcome page! </p>
+    <ul>
+      <li><a routerLink="">Home</a></li>
+      <li><a routerLink="/batman">Batman</a></li>
+      <li><a routerLink="/superman">Superman</a></li>
+    </ul>
+  `,
+  styles: []
+})
+export class WelcomeComponent {
+
+
+SUPERMAN COMPONENT
+------------------------------------------------
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-superman',
+  template: `
+    <p> superman page! </p>
+    <button (click)="navfun('')" >Home</button>
+    <button (click)="navfun('batman')" >Batman</button>
+    <button (click)="navfun('superman')" >Superman</button>
+  `,
+  styles: []
+})
+export class SupermanComponent {
+constructor(private rtr:Router){
+
+}
+  navfun(arg){
+    this.rtr.navigate([arg])
+  };
+
+}
+
+
+
+HERO ROUTES
+--------------------------------------------
+import { WelcomeComponent } from "./welcome.component";
+import { BatmanComponent } from "./batman.component";
+import { SupermanComponent } from "./superman.component";
+
+export const HeroRoutes = [
+    { path : '',            component: WelcomeComponent},
+    { path : 'batman',      component: BatmanComponent},
+    { path : 'superman',    component: SupermanComponent}
+]
