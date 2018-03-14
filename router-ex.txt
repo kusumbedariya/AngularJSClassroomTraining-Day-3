@@ -83,3 +83,37 @@ export const HeroRoutes = [
     { path : 'batman',      component: BatmanComponent},
     { path : 'superman',    component: SupermanComponent}
 ]
+
+
+
+
+APP MODULE
+--------------------------------------------
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { BatmanComponent } from './batman.component';
+import { SupermanComponent } from './superman.component';
+import { WelcomeComponent } from './welcome.component';
+import { NotfoundComponent } from './notfound.component';
+import { RouterModule } from '@angular/router'
+import { HeroRoutes } from './hero.routes';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    BatmanComponent,
+    SupermanComponent,
+    WelcomeComponent,
+    NotfoundComponent
+  ],
+  imports: [
+    BrowserModule, RouterModule.forRoot(HeroRoutes)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
