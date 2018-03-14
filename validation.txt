@@ -1,0 +1,55 @@
+import { Component, OnInit } from '@angular/core';
+
+/*
+html5 validations
+css validations
+javascript validations
+minimum
+maximum
+require
+pattern
+step
+*/
+@Component({
+  selector: 'app-form',
+  template: `
+  <form (submit)="formsubmit(myForm)" #myForm="ngForm"   novalidate>
+  <h1>{{ defaultval }}</h1>
+  <label>User Name : </label>
+  <input #unameInput="ngModel" [(ngModel)]="uname" type="text" name="uname" required/>
+  <br/>
+  
+  <label>eMail : </label>
+  <input type="email" #emailInput="ngModel" [(ngModel)]="uemail"  name="email" required pattern=".+@.+"/>
+  <br/>
+  
+  <label></label>
+  <button [disabled]="myForm.invalid" type="submit"> Login </button>
+          </form>
+  <div class="validator">
+      <p *ngIf="unameInput.invalid && unameInput.touched"> Do enter your name </p>
+      <p *ngIf="emailInput.invalid && emailInput.touched"> Do enter your email </p>
+  </div>
+  `,
+  styles : [`
+            label{width: 100px; display: inline-block}
+            input.ng-invalid.ng-touched{border: 2px solid #d43f3a}
+            input.ng-valid.ng-touched{border: 2px solid #4cae4c}
+        `]
+})
+export class FormComponent implements OnInit {
+
+  constructor() { }
+
+  uname = "";
+  uemail = "";
+
+  formsubmit = function(formElement){
+     //  console.log(evt.target)// form element
+     if(formElement.submitted == true){
+         console.log(formElement);
+         formElement.resetForm() ;
+     }
+  }
+
+}
